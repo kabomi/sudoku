@@ -187,6 +187,14 @@
                 expect(possibleValues.indexOf(5)).toBe(-1);
                 expect(possibleValues.indexOf(9)).toBe(-1);
             });
+            it("returns possible values for a certain hole", function(){
+                var nextHole = game.nextHole();
+                var possibleValues = game.getPossibleValuesFor(nextHole);
+
+                expect(possibleValues.length).toBe(2);
+                expect(possibleValues[0]).toBe(3);
+                expect(possibleValues[1]).toBe(4);
+            });
         });
         
     });
