@@ -139,6 +139,17 @@
                 expect(nextHole.x).toBe(0);
                 expect(nextHole.y).toBe(0);
             });
+            it("returns possible values for a row", function(){
+                var nextHole = game.nextHole();
+                var possibleValues = game.getPossibleValuesForRow(0);
+
+                expect(possibleValues.length).toBe(5);
+                expect(possibleValues[0]).toBe(2);
+                expect(possibleValues[1]).toBe(3);
+                expect(possibleValues[2]).toBe(4);
+                expect(possibleValues[3]).toBe(5);
+                expect(possibleValues[4]).toBe(8);
+            });
         });
         
     });
