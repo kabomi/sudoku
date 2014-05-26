@@ -160,6 +160,33 @@
                 expect(possibleValues[2]).toBe(7);
                 expect(possibleValues[3]).toBe(8);
             });
+            it("returns possible values for subSudoku", function(){
+                var possibleValues = game.getPossibleValuesForSubSudoku({x:0,y:5});
+
+                expect(possibleValues.length).toBe(3);
+                expect(possibleValues[0]).toBe(2);
+                expect(possibleValues[1]).toBe(4);
+                expect(possibleValues[2]).toBe(8);
+
+                possibleValues = game.getPossibleValuesForSubSudoku({x:4,y:4});
+
+                expect(possibleValues.length).toBe(8);
+                expect(possibleValues.indexOf(5)).toBe(-1);
+
+                possibleValues = game.getPossibleValuesForSubSudoku({x:2,y:8});
+
+                expect(possibleValues.length).toBe(6);
+                expect(possibleValues.indexOf(6)).toBe(-1);
+                expect(possibleValues.indexOf(7)).toBe(-1);
+                expect(possibleValues.indexOf(9)).toBe(-1);
+
+                possibleValues = game.getPossibleValuesForSubSudoku({x:8,y:8});
+
+                expect(possibleValues.length).toBe(6);
+                expect(possibleValues.indexOf(3)).toBe(-1);
+                expect(possibleValues.indexOf(5)).toBe(-1);
+                expect(possibleValues.indexOf(9)).toBe(-1);
+            });
         });
         
     });
