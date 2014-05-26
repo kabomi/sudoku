@@ -4,7 +4,7 @@
     "use strict";
 
     describe("Sudoku", function(){
-        xdescribe("4x4 game", function (){
+        describe("4x4 game", function (){
             var sudoku = [
                     [3,4,1,0],
                     [0,2,0,0],
@@ -13,6 +13,8 @@
                 ];
             var game = app.init(sudoku);
             it("prints a given matrix", function(){
+                console.log("Sudoku to solve");
+                console.log("_--------------4x4---------------_");
                 game.print();
             });
             it("searchs the next hole", function(){
@@ -69,6 +71,8 @@
                 expect(possibleValues.length).toBe(1);
             });
             it("solves sudoku", function(){
+                console.log("Sudoku solution");
+                console.log("++++++++++++4x4++++++++++++++");
                 var solvedGame = game.solve();
                 var solvedSudoku = solvedGame.sudoku;
 
@@ -100,11 +104,14 @@
                     [2,4,3,1]  
                 ];
                 game = app.init(unsolvedSudoku);
-                console.log("_------------------------------_");
+                console.log("Sudoku to solve");
+                console.log("_--------------4x4---------------_");
+                game.print();
                 var solution = game.solve();
 
                 expect(solution.hasSolution(solvedSudoku)).toBeTruthy();
-                console.log("++++++++++++++++++++++++++++++++++");
+                console.log("Sudoku solution");
+                console.log("+++++++++++++++4x4++++++++++++++++");
                 solution.print();
             });
         });
@@ -122,6 +129,8 @@
                 ];
             var game = app.init(sudoku);
             it("prints a given matrix", function(){
+                console.log("Sudoku to solve");
+                console.log("_--------------9x9---------------_");
                 var printedSudoku = game.print();
                 var hSeparator = '-';
                 var vSeparator = '|';
@@ -196,6 +205,7 @@
                 expect(possibleValues[1]).toBe(4);
             });
             it("solves sudoku", function(){
+                console.log("Sudoku solution");
                 console.log("++++++++++++9x9++++++++++++++");
                 var solvedGame = game.solve();
                 var solvedSudoku = solvedGame.sudoku;
@@ -213,6 +223,40 @@
                 expect(solvedSudoku[8][8]).toBe(2);
 
                 solvedGame.print();
+            });
+            it("checks if the sudoku is equal to other", function(){
+                var unsolvedSudoku = [
+                    [0,0,7,0,0,8,0,4,2],
+                    [0,9,3,4,0,6,1,0,8],
+                    [0,0,1,7,0,0,0,0,0],
+                    [0,0,9,3,0,0,0,0,0],
+                    [5,0,0,0,0,7,4,3,0],
+                    [0,6,8,0,4,5,7,2,0],
+                    [0,3,6,0,8,0,0,9,0],
+                    [0,7,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,8,6]
+                ];
+                var solvedSudoku = [
+                    [6,5,7,1,3,8,9,4,2],
+                    [2,9,3,4,5,6,1,7,8],
+                    [4,8,1,7,2,9,6,5,3],
+                    [7,4,9,3,1,2,8,6,5],
+                    [5,1,2,8,6,7,4,3,9],
+                    [3,6,8,9,4,5,7,2,1],
+                    [1,3,6,2,8,4,5,9,7],
+                    [8,7,5,6,9,3,2,1,4],
+                    [9,2,4,5,7,1,3,8,6]  
+                ];
+                game = app.init(unsolvedSudoku);
+                console.log("Sudoku to solve");
+                console.log("_--------------9x9---------------_");
+                game.print();
+                var solution = game.solve();
+
+                expect(solution.hasSolution(solvedSudoku)).toBeTruthy();
+                console.log("Sudoku solution");
+                console.log("+++++++++++++++9x9++++++++++++++++");
+                solution.print();
             });
         });
         

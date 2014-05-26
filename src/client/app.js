@@ -144,7 +144,7 @@ var app = app || {};
                 
                 if (nextHole === null) return game;
 
-                console.log("nextHole(" + nextHole.x + "," + nextHole.y + ")");
+                //console.log("nextHole(" + nextHole.x + "," + nextHole.y + ")");
                 var possibleValues = game.getPossibleValuesFor(nextHole);
                 var backupSudoku = clone(game.sudoku);
                 for (var i = 0; i < possibleValues.length;i++){
