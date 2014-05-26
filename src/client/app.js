@@ -1,8 +1,11 @@
 
 var app = app || {};
 
+
 (function(){
     "use strict";
+
+    var _DEBUG = false;
 
     function init(sudoku){
         var self = {};
@@ -39,9 +42,6 @@ var app = app || {};
             var colPossibleValues = self.getPossibleValuesForCol(hole.y);
             var subSudokuPossibleValues = self.getPossibleValuesForSubSudoku(hole);
             
-            //console.log("rowPosVal:" + rowPossibleValues);
-            //console.log("colPosVal:" + colPossibleValues);
-            //console.log("subSudokuPosVal:" + subSudokuPossibleValues);
             result = intersectionOfValues(
                 rowPossibleValues,
                 colPossibleValues,
@@ -52,13 +52,10 @@ var app = app || {};
         
         self.getPossibleValuesForRow = function(rowIndex){
             var possibleValues = getAllValuesFromOneTo(sudoku.length);
-            //console.log("possibleValues:" + possibleValues);
             self.sudoku[rowIndex].forEach(function(col, colIndex){
                 var possibleValueIndex = possibleValues.indexOf(col);
-                //console.log("possibleValueIndex:" + possibleValueIndex + ";col:" + col + ";colIndex:" + colIndex);
                 if ( possibleValueIndex >= 0){
                     possibleValues.splice(possibleValueIndex, 1);
-                    //console.log("possibleValues:" + possibleValues);
                 }
             });
             return possibleValues;
@@ -88,20 +85,14 @@ var app = app || {};
             while (hole.y >= subColIndex + self.size){
                 subColIndex += self.size;
             }
-            //console.log("subRowIndex:" + subRowIndex);
-            //console.log("subColIndex:" + subColIndex);
-            //console.log("sudoku.size:" + self.size);
             for (var i= subRowIndex; i < subRowIndex + self.size; i++){
                 for (var j= subColIndex; j < subColIndex + self.size; j++){
-                    //console.log("i,j:" + i + "," + j);
                     var possibleValueIndex = possibleValues.indexOf(self.sudoku[i][j]);
                     if (possibleValueIndex >= 0){
                         possibleValues.splice(possibleValueIndex, 1);
                     }    
                 }
             }
-            //console.log("hole:" + hole.x + "," + hole.y);
-            //console.log("possibleValues:" + possibleValues);
             return possibleValues;
         };
         function intersectionOfValues(){
@@ -144,7 +135,6 @@ var app = app || {};
                 
                 if (nextHole === null) return game;
 
-                //console.log("nextHole(" + nextHole.x + "," + nextHole.y + ")");
                 var possibleValues = game.getPossibleValuesFor(nextHole);
                 var backupSudoku = clone(game.sudoku);
                 for (var i = 0; i < possibleValues.length;i++){
@@ -194,10 +184,8 @@ var app = app || {};
 
             sudoku.forEach(function(row, rowIndex){
                 var line = "";
-                //console.log("rowIndex:" + rowIndex + ",size:" + self.size);
-                //console.log("mod result:" + (rowIndex)%(self.size));
                 if (((rowIndex)%(self.size) === 0)){
-                    console.log(separator);
+                    app.log(separator);
                     result.push(separator);
                 }
                 row.forEach(function(col, colIndex){
@@ -207,10 +195,10 @@ var app = app || {};
                         line += '|';
                     }
                 });
-                console.log(line);
+                app.log(line);
                 result.push(line);
             });
-            console.log(separator);
+            app.log(separator);
             result.push(separator);
 
             return result;
@@ -225,6 +213,12 @@ var app = app || {};
         return self;
     }
 
+    function log(object){
+        if (_DEBUG){
+            console.log(object);
+        }
+    }
+
     app.init = init;
-    
+    app.log = log;  
 })();

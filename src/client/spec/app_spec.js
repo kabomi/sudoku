@@ -13,8 +13,8 @@
                 ];
             var game = app.init(sudoku);
             it("prints a given matrix", function(){
-                console.log("Sudoku to solve");
-                console.log("_--------------4x4---------------_");
+                app.log("Sudoku to solve");
+                app.log("_--------------4x4---------------_");
                 game.print();
             });
             it("searchs the next hole", function(){
@@ -71,8 +71,8 @@
                 expect(possibleValues.length).toBe(1);
             });
             it("solves sudoku", function(){
-                console.log("Sudoku solution");
-                console.log("++++++++++++4x4++++++++++++++");
+                app.log("Sudoku solution");
+                app.log("++++++++++++4x4++++++++++++++");
                 var solvedGame = game.solve();
                 var solvedSudoku = solvedGame.sudoku;
 
@@ -104,14 +104,14 @@
                     [2,4,3,1]  
                 ];
                 game = app.init(unsolvedSudoku);
-                console.log("Sudoku to solve");
-                console.log("_--------------4x4---------------_");
+                app.log("Sudoku to solve");
+                app.log("_--------------4x4---------------_");
                 game.print();
                 var solution = game.solve();
 
                 expect(solution.hasSolution(solvedSudoku)).toBeTruthy();
-                console.log("Sudoku solution");
-                console.log("+++++++++++++++4x4++++++++++++++++");
+                app.log("Sudoku solution");
+                app.log("+++++++++++++++4x4++++++++++++++++");
                 solution.print();
             });
         });
@@ -129,8 +129,8 @@
                 ];
             var game = app.init(sudoku);
             it("prints a given matrix", function(){
-                console.log("Sudoku to solve");
-                console.log("_--------------9x9---------------_");
+                app.log("Sudoku to solve");
+                app.log("_--------------9x9---------------_");
                 var printedSudoku = game.print();
                 var hSeparator = '-';
                 var vSeparator = '|';
@@ -205,8 +205,8 @@
                 expect(possibleValues[1]).toBe(4);
             });
             it("solves sudoku", function(){
-                console.log("Sudoku solution");
-                console.log("++++++++++++9x9++++++++++++++");
+                app.log("Sudoku solution");
+                app.log("++++++++++++9x9++++++++++++++");
                 var solvedGame = game.solve();
                 var solvedSudoku = solvedGame.sudoku;
 
@@ -248,14 +248,14 @@
                     [9,2,4,5,7,1,3,8,6]  
                 ];
                 game = app.init(unsolvedSudoku);
-                console.log("Sudoku to solve");
-                console.log("_--------------9x9---------------_");
+                app.log("Sudoku to solve");
+                app.log("_--------------9x9---------------_");
                 game.print();
                 var solution = game.solve();
 
                 expect(solution.hasSolution(solvedSudoku)).toBeTruthy();
-                console.log("Sudoku solution");
-                console.log("+++++++++++++++9x9++++++++++++++++");
+                app.log("Sudoku solution");
+                app.log("+++++++++++++++9x9++++++++++++++++");
                 solution.print();
             });
         });
