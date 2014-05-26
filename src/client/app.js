@@ -106,10 +106,10 @@ var app = app || {};
         };
         function intersectionOfValues(){
             var result = [];
-            console.log("arguments");
+            /*console.log("arguments");
             console.log(arguments[0]);
             console.log(arguments[1]);
-            console.log(arguments[2]);
+            console.log(arguments[2]);*/
             if (arguments.length > 2){
                 result = intersectionOfValues(arguments[0], arguments[1]);
                 return intersectionOfValues(result, arguments[2]);

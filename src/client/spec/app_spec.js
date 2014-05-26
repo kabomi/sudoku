@@ -4,7 +4,7 @@
     "use strict";
 
     describe("Sudoku", function(){
-        describe("4x4 game", function (){
+        xdescribe("4x4 game", function (){
             var sudoku = [
                     [3,4,1,0],
                     [0,2,0,0],
@@ -114,7 +114,7 @@
                     [0,8,0,0,0,3,0,9,0],
                     [9,0,2,6,5,7,0,0,0],
                     [2,0,0,0,0,5,6,0,0],
-                    [6,0,0,0,0,0,2,7,5],
+                    [6,0,0,0,0,0,2,5,7],
                     [0,0,0,0,0,0,0,0,3],
                     [0,0,7,0,6,0,0,3,5],
                     [1,0,3,0,0,0,0,0,9],
@@ -194,6 +194,25 @@
                 expect(possibleValues.length).toBe(2);
                 expect(possibleValues[0]).toBe(3);
                 expect(possibleValues[1]).toBe(4);
+            });
+            it("solves sudoku", function(){
+                console.log("++++++++++++9x9++++++++++++++");
+                var solvedGame = game.solve();
+                var solvedSudoku = solvedGame.sudoku;
+
+                expect(solvedSudoku[0][0]).toBe(3);
+                expect(solvedSudoku[0][1]).toBe(4);
+                expect(solvedSudoku[0][2]).toBe(5);
+                expect(solvedSudoku[0][5]).toBe(8);
+                expect(solvedSudoku[0][7]).toBe(2);
+
+                expect(solvedSudoku[8][1]).toBe(6);
+                expect(solvedSudoku[8][4]).toBe(8);
+                expect(solvedSudoku[8][6]).toBe(1);
+                expect(solvedSudoku[8][7]).toBe(7);
+                expect(solvedSudoku[8][8]).toBe(2);
+
+                solvedGame.print();
             });
         });
         
