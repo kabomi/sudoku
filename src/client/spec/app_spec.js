@@ -25,51 +25,31 @@
             });
             it("returns possible values for subSudoku", function(){
                 var possibleValues = game.getPossibleValuesForSubSudoku({x:1,y:0});
-
-                expect(possibleValues.length).toBe(1);
-                expect(possibleValues[0]).toBe(1);
+                expectPossibleValues(possibleValues).toBe([1]);
 
                 possibleValues = game.getPossibleValuesForSubSudoku({x:1,y:3});
-
-                expect(possibleValues.length).toBe(3);
-                expect(possibleValues[0]).toBe(2);
-                expect(possibleValues[1]).toBe(3);
-                expect(possibleValues[2]).toBe(4);
+                expectPossibleValues(possibleValues).toBe([2,3,4]);
 
                 possibleValues = game.getPossibleValuesForSubSudoku({x:2,y:0});
-
-                expect(possibleValues.length).toBe(3);
-                expect(possibleValues[0]).toBe(2);
-                expect(possibleValues[1]).toBe(3);
-                expect(possibleValues[2]).toBe(4);
+                expectPossibleValues(possibleValues).toBe([2,3,4]);
 
                 possibleValues = game.getPossibleValuesForSubSudoku({x:2,y:3});
-
-                expect(possibleValues.length).toBe(1);
-                expect(possibleValues[0]).toBe(1);
+                expectPossibleValues(possibleValues).toBe([1]);
             });
             it("returns possible values for a row", function(){
                 var nextHole = game.nextHole();
                 var possibleValues = game.getPossibleValuesForRow(0);
-
-                expect(possibleValues.length).toBe(1);
-                expect(possibleValues[0]).toBe(2);
+                expectPossibleValues(possibleValues).toBe([2]);
             });
             it("returns possible values for a column", function(){
                 var nextHole = game.nextHole();
                 var possibleValues = game.getPossibleValuesForCol(3);
-
-                expect(possibleValues.length).toBe(3);
-                expect(possibleValues[0]).toBe(1);
-                expect(possibleValues[1]).toBe(2);
-                expect(possibleValues[2]).toBe(4);
+                expectPossibleValues(possibleValues).toBe([1,2,4]);
             });
             it("returns possible values for a certain hole", function(){
                 var nextHole = game.nextHole();
                 var possibleValues = game.getPossibleValuesFor(nextHole);
-
-                expect(possibleValues[0]).toBe(2);
-                expect(possibleValues.length).toBe(1);
+                expectPossibleValues(possibleValues).toBe([2]);
             });
             it("solves sudoku", function(){
                 app.log("Sudoku solution");
@@ -153,57 +133,31 @@
                 var nextHole = game.nextHole();
                 var possibleValues = game.getPossibleValuesForRow(0);
 
-                expect(possibleValues.length).toBe(5);
-                expect(possibleValues[0]).toBe(2);
-                expect(possibleValues[1]).toBe(3);
-                expect(possibleValues[2]).toBe(4);
-                expect(possibleValues[3]).toBe(5);
-                expect(possibleValues[4]).toBe(8);
+                expectPossibleValues(possibleValues).toBe([2,3,4,5,8]);
             });
             it("returns possible values for a column", function(){
                 var nextHole = game.nextHole();
                 var possibleValues = game.getPossibleValuesForCol(0);
 
-                expect(possibleValues.length).toBe(4);
-                expect(possibleValues[0]).toBe(3);
-                expect(possibleValues[1]).toBe(4);
-                expect(possibleValues[2]).toBe(7);
-                expect(possibleValues[3]).toBe(8);
+                expectPossibleValues(possibleValues).toBe([3,4,7,8]);
             });
             it("returns possible values for subSudoku", function(){
                 var possibleValues = game.getPossibleValuesForSubSudoku({x:0,y:5});
-
-                expect(possibleValues.length).toBe(3);
-                expect(possibleValues[0]).toBe(2);
-                expect(possibleValues[1]).toBe(4);
-                expect(possibleValues[2]).toBe(8);
+                expectPossibleValues(possibleValues).toBe([2,4,8]);
 
                 possibleValues = game.getPossibleValuesForSubSudoku({x:4,y:4});
-
-                expect(possibleValues.length).toBe(8);
-                expect(possibleValues.indexOf(5)).toBe(-1);
+                expectPossibleValues(possibleValues).toBe([1,2,3,4,6,7,8,9]);
 
                 possibleValues = game.getPossibleValuesForSubSudoku({x:2,y:8});
-
-                expect(possibleValues.length).toBe(6);
-                expect(possibleValues.indexOf(6)).toBe(-1);
-                expect(possibleValues.indexOf(7)).toBe(-1);
-                expect(possibleValues.indexOf(9)).toBe(-1);
+                expectPossibleValues(possibleValues).toBe([1,2,3,4,5,8]);
 
                 possibleValues = game.getPossibleValuesForSubSudoku({x:8,y:8});
-
-                expect(possibleValues.length).toBe(6);
-                expect(possibleValues.indexOf(3)).toBe(-1);
-                expect(possibleValues.indexOf(5)).toBe(-1);
-                expect(possibleValues.indexOf(9)).toBe(-1);
+                expectPossibleValues(possibleValues).toBe([1,2,4,6,7,8]);
             });
             it("returns possible values for a certain hole", function(){
                 var nextHole = game.nextHole();
                 var possibleValues = game.getPossibleValuesFor(nextHole);
-
-                expect(possibleValues.length).toBe(2);
-                expect(possibleValues[0]).toBe(3);
-                expect(possibleValues[1]).toBe(4);
+                expectPossibleValues(possibleValues).toBe([3,4]);
             });
             it("solves sudoku", function(){
                 app.log("Sudoku solution");
@@ -265,6 +219,20 @@
             expect(nextHole.x).toBe(x);
             expect(nextHole.y).toBe(y);
         }
+        function expectPossibleValues(possibleValues){
+                return {
+                    toBe: function(arrayValues){
+                        var result = true;
+                        expect(possibleValues.length).toBe(arrayValues.length);
+                        possibleValues.forEach(function(value, index){
+                            if (value !== arrayValues[index]){
+                                result = false;
+                            }
+                        });
+                        expect(result).toBeTruthy();
+                    }
+                }
+            }
     });
 
 })();
