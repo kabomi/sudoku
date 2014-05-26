@@ -150,6 +150,16 @@
                 expect(possibleValues[3]).toBe(5);
                 expect(possibleValues[4]).toBe(8);
             });
+            it("returns possible values for a column", function(){
+                var nextHole = game.nextHole();
+                var possibleValues = game.getPossibleValuesForCol(0);
+
+                expect(possibleValues.length).toBe(4);
+                expect(possibleValues[0]).toBe(3);
+                expect(possibleValues[1]).toBe(4);
+                expect(possibleValues[2]).toBe(7);
+                expect(possibleValues[3]).toBe(8);
+            });
         });
         
     });
