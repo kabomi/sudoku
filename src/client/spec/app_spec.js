@@ -133,7 +133,11 @@
                 expect(printedSudoku[4][0]).toBe(hSeparator);
                 expect(printedSudoku[8][0]).toBe(hSeparator);
                 expect(printedSudoku[12][0]).toBe(hSeparator);
-
+            });
+            it("searchs the next hole", function(){
+                var nextHole = game.nextHole();
+                expect(nextHole.x).toBe(0);
+                expect(nextHole.y).toBe(0);
             });
         });
         
