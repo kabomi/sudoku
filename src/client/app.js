@@ -114,7 +114,7 @@ var app = app || {};
                 });
                 return result;
             }
-        };
+        }
         function getAllValuesFromOneTo(number){
             var result = [];
             var value = 1;
@@ -124,7 +124,7 @@ var app = app || {};
             }
 
             return result;
-        };
+        }
         
         self.solve = function(){
             return solve(self);
