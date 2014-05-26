@@ -13,7 +13,7 @@
                 ];
             var game = app.init(sudoku);
             it("prints a given matrix", function(){
-                sudoku.print();
+                game.print();
             });
             it("searchs the next hole", function(){
                 var nextHole = game.nextHole();
@@ -69,7 +69,8 @@
                 expect(possibleValues.length).toBe(1);
             });
             it("solves sudoku", function(){
-                var solvedSudoku = game.solve().sudoku;
+                var solvedGame = game.solve();
+                var solvedSudoku = solvedGame.sudoku;
 
                 expect(solvedSudoku[0][3]).toBe(2);
 
@@ -83,7 +84,7 @@
 
                 expect(solvedSudoku[3][0]).toBe(2);
 
-                solvedSudoku.print();
+                solvedGame.print();
             });
             it("checks if the sudoku is equal to other", function(){
                 var unsolvedSudoku = [
@@ -104,7 +105,7 @@
 
                 expect(solution.hasSolution(solvedSudoku)).toBeTruthy();
                 console.log("++++++++++++++++++++++++++++++++++");
-                solution.sudoku.print();
+                solution.print();
             });
         });
         describe("9x9 game", function (){
@@ -121,7 +122,7 @@
                 ];
             var game = app.init(sudoku);
             it("prints a given matrix", function(){
-                var printedSudoku = sudoku.print();
+                var printedSudoku = game.print();
                 var hSeparator = '-';
                 var vSeparator = '|';
                 expect(printedSudoku[0][0]).toBe(hSeparator);

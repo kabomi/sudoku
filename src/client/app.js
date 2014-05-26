@@ -8,7 +8,12 @@ var app = app || {};
         var self = {};
 
         self.sudoku = sudoku;
-        self.size = sudoku.length/2;
+
+        var size = 0;
+        if (sudoku.length === 4) size = 2;
+        if (sudoku.length === 9) size = 3;
+        self.size = size;
+
         self.nextHole = function(){
             var result = null;
             self.sudoku.forEach(function(row, rowIndex){
@@ -152,7 +157,7 @@ var app = app || {};
                 game.sudoku = backupSudoku;
                 return game;
             }catch(ex){
-                app.print(game.sudoku);
+                game.print();
                 throw ex;
             }
         }
@@ -182,28 +187,34 @@ var app = app || {};
             return areEqual;
         };
 
-        return self;
-    }
+        self.print = function(){
+            var sudoku = self.sudoku;
+            var separator = buildSeparator(sudoku.length);
+            var result = [];
 
-
-    function print(sudoku){
-        var separator = buildSeparator(sudoku.length);
-        sudoku.forEach(function(row, rowIndex){
-            var line = "";
-            
-            if (((rowIndex)%(sudoku.length/2) === 0)){
-                console.log(separator);
-            }
-            row.forEach(function(col, colIndex){
-                if (colIndex === 0) line += '|';
-                line += col;
-                if (((colIndex + 1)%(sudoku.length/2) === 0)){
-                    line += '|';
+            sudoku.forEach(function(row, rowIndex){
+                var line = "";
+                //console.log("rowIndex:" + rowIndex + ",size:" + self.size);
+                //console.log("mod result:" + (rowIndex)%(self.size));
+                if (((rowIndex)%(self.size) === 0)){
+                    console.log(separator);
+                    result.push(separator);
                 }
+                row.forEach(function(col, colIndex){
+                    if (colIndex === 0) line += '|';
+                    line += col;
+                    if (((colIndex + 1)%(self.size) === 0)){
+                        line += '|';
+                    }
+                });
+                console.log(line);
+                result.push(line);
             });
-            console.log(line);
-        });
-        console.log(separator);
+            console.log(separator);
+            result.push(separator);
+
+            return result;
+        }
         function buildSeparator(length){
             var separator = "";
             for (var i = 0; i < length; i++){
@@ -211,9 +222,9 @@ var app = app || {};
             }
             return separator;
         }
+        return self;
     }
 
-    app.print = print;
     app.init = init;
     
 })();
