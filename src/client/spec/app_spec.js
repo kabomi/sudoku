@@ -4,23 +4,24 @@
     "use strict";
 
     describe("Sudoku", function(){
+        var sudoku, game;
         describe("4x4 game", function (){
-            var sudoku = [
-                    [3,4,1,0],
-                    [0,2,0,0],
-                    [0,0,2,0],
-                    [0,1,4,3]
-                ];
-            var game = app.init(sudoku);
+            beforeEach(function(){
+                sudoku = [
+                        [3,4,1,0],
+                        [0,2,0,0],
+                        [0,0,2,0],
+                        [0,1,4,3]
+                    ];
+                game = app.init(sudoku);
+            });
             it("prints a given matrix", function(){
                 app.log("Sudoku to solve");
                 app.log("_--------------4x4---------------_");
                 game.print();
             });
             it("searchs the next hole", function(){
-                var nextHole = game.nextHole();
-                expect(nextHole.x).toBe(0);
-                expect(nextHole.y).toBe(3);
+                expectNextHolePositionToBe(0,3);
             });
             it("returns possible values for subSudoku", function(){
                 var possibleValues = game.getPossibleValuesForSubSudoku({x:1,y:0});
@@ -116,18 +117,20 @@
             });
         });
         describe("9x9 game", function (){
-            var sudoku = [
-                    [0,0,0,9,1,0,7,0,6],
-                    [0,8,0,0,0,3,0,9,0],
-                    [9,0,2,6,5,7,0,0,0],
-                    [2,0,0,0,0,5,6,0,0],
-                    [6,0,0,0,0,0,2,5,7],
-                    [0,0,0,0,0,0,0,0,3],
-                    [0,0,7,0,6,0,0,3,5],
-                    [1,0,3,0,0,0,0,0,9],
-                    [5,0,4,3,0,9,0,0,0]
-                ];
-            var game = app.init(sudoku);
+            beforeEach(function(){
+                sudoku = [
+                        [0,0,0,9,1,0,7,0,6],
+                        [0,8,0,0,0,3,0,9,0],
+                        [9,0,2,6,5,7,0,0,0],
+                        [2,0,0,0,0,5,6,0,0],
+                        [6,0,0,0,0,0,2,5,7],
+                        [0,0,0,0,0,0,0,0,3],
+                        [0,0,7,0,6,0,0,3,5],
+                        [1,0,3,0,0,0,0,0,9],
+                        [5,0,4,3,0,9,0,0,0]
+                    ];
+                game = app.init(sudoku);
+            });
             it("prints a given matrix", function(){
                 app.log("Sudoku to solve");
                 app.log("_--------------9x9---------------_");
@@ -144,9 +147,7 @@
                 expect(printedSudoku[12][0]).toBe(hSeparator);
             });
             it("searchs the next hole", function(){
-                var nextHole = game.nextHole();
-                expect(nextHole.x).toBe(0);
-                expect(nextHole.y).toBe(0);
+                expectNextHolePositionToBe(0,0);
             });
             it("returns possible values for a row", function(){
                 var nextHole = game.nextHole();
@@ -259,7 +260,11 @@
                 solution.print();
             });
         });
-        
+        function expectNextHolePositionToBe(x, y){
+            var nextHole = game.nextHole();
+            expect(nextHole.x).toBe(x);
+            expect(nextHole.y).toBe(y);
+        }
     });
 
 })();
