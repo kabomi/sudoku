@@ -107,6 +107,34 @@
                 app.print(solution.sudoku);
             });
         });
+        describe("9x9 game", function (){
+            var sudoku = [
+                    [0,0,0,9,1,0,7,0,6],
+                    [0,8,0,0,0,3,0,9,0],
+                    [9,0,2,6,5,7,0,0,0],
+                    [2,0,0,0,0,5,6,0,0],
+                    [6,0,0,0,0,0,2,7,5],
+                    [0,0,0,0,0,0,0,0,3],
+                    [0,0,7,0,6,0,0,3,5],
+                    [1,0,3,0,0,0,0,0,9],
+                    [5,0,4,3,0,9,0,0,0]
+                ];
+            var game = app.init(sudoku);
+            it("prints a given matrix", function(){
+                var printedSudoku = app.print(sudoku);
+                var hSeparator = '-';
+                var vSeparator = '|';
+                expect(printedSudoku[0][0]).toBe(hSeparator);
+                expect(printedSudoku[1][0]).toBe(vSeparator);
+                expect(printedSudoku[1][4]).toBe(vSeparator);
+                expect(printedSudoku[1][8]).toBe(vSeparator);
+                expect(printedSudoku[1][12]).toBe(vSeparator);
+                expect(printedSudoku[4][0]).toBe(hSeparator);
+                expect(printedSudoku[8][0]).toBe(hSeparator);
+                expect(printedSudoku[12][0]).toBe(hSeparator);
+
+            });
+        });
         
     });
 
