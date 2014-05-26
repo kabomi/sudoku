@@ -82,11 +82,11 @@ var app = app || {};
             var subRowIndex = 0;
             var subColIndex = 0;
 
-            if (hole.x >= self.size){
-                subRowIndex = self.size;
+            while (hole.x >= subRowIndex + self.size){
+                subRowIndex += self.size;
             }
-            if (hole.y >= self.size){
-                subColIndex = self.size;
+            while (hole.y >= subColIndex + self.size){
+                subColIndex += self.size;
             }
             //console.log("subRowIndex:" + subRowIndex);
             //console.log("subColIndex:" + subColIndex);
