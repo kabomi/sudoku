@@ -220,19 +220,19 @@
             expect(nextHole.y).toBe(y);
         }
         function expectPossibleValues(possibleValues){
-                return {
-                    toBe: function(arrayValues){
-                        var result = true;
-                        expect(possibleValues.length).toBe(arrayValues.length);
-                        possibleValues.forEach(function(value, index){
-                            if (value !== arrayValues[index]){
-                                result = false;
-                            }
-                        });
-                        expect(result).toBeTruthy();
-                    }
+            return {
+                toBe: function(arrayValues){
+                    var result = true;
+                    expect(possibleValues.length).toBe(arrayValues.length);
+                    possibleValues.forEach(function(value, index){
+                        if (value !== arrayValues[index]){
+                            result = false;
+                        }
+                    });
+                    expect(result).toBeTruthy();
                 }
             }
+        }
     });
 
 })();
